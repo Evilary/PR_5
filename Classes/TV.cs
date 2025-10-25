@@ -14,6 +14,8 @@ namespace TV_Чернышков.Classes
         private int activeChannel;
         private int activeVolume;
 
+        public bool IsOn {  get; set; } 
+
         public int ActiveChannel
         {
             get
@@ -34,25 +36,35 @@ namespace TV_Чернышков.Classes
 
         public TV()
         {
+            IsOn = false;
+
+
             Channels.Add(new Channel()
             {
-                Name = "Практическое занятие №3 Объявление классов и создание объект в C#.mp4",
-                Src = @"C:\User\aooshchepkov\Downloads\1.mp4"
+                Name = "Туманный лес",
+                Src = @"C:\Users\student-a502.PERMAVIAT\Desktop\dsds\1.mp4"
             });
             Channels.Add(new Channel()
             {
-                Name = "Практическое занятие №4 Использование методов в ООП  Разница между простыми и статическими методами.mp4",
-                Src = @"C:\Users\aooshchepkov\Downloads\2.mp4"
+                Name = "Мужик с велосипедом",
+                Src = @"C:\Users\student-a502.PERMAVIAT\Desktop\dsds\2.mp4"
             });
             Channels.Add(new Channel()
             {
-                Name = "Практическое задание №5 Конструкторы в ООП.mp4",
-                Src = @"C:\Users\aooshchepkov\Downloads\3.mp4"
+                Name = "Подводный мир",
+                Src = @"C:\Users\student-a502.PERMAVIAT\Desktop\dsds\3.mp4"
             });
+        }
+
+        public void Power()
+        {
+            IsOn = !IsOn;
         }
 
         public void SwapChanell(MediaElement _MediaElement, Label _NameChannel)
         {
+            if (!IsOn) return;
+
             DoubleAnimation StartAnimation = new DoubleAnimation();
             StartAnimation.From = 1;
             StartAnimation.To = 0;
@@ -81,12 +93,14 @@ namespace TV_Чернышков.Classes
 
         public void NextChannel(MediaElement _MediaElement, Label _NameChannel)
         {
+            if (!IsOn) return ;
             ActiveChannel++;
             SwapChanell(_MediaElement, _NameChannel);
         }
 
         public void BackChannel(MediaElement _MediaElement, Label _NameChannel)
         {
+            if (!IsOn) return;
             ActiveChannel--;
             SwapChanell(_MediaElement, _NameChannel);
         }
